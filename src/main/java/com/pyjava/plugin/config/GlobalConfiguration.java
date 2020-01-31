@@ -10,9 +10,10 @@ import java.util.*;
 import static com.pyjava.plugin.config.Constant.*;
 
 /**
+ * 全局配置类
+ *
  * @author zhaojj9
- * @description 全局配置类
- * @date 2019-12-13 16:42
+ * @since 1.0.0
  */
 @Data
 public class GlobalConfiguration {
@@ -71,7 +72,7 @@ public class GlobalConfiguration {
 
     /**
      * 加载配置
-     * <p>
+     *
      * 1. author 作者 若配置文件中未包含作者信息,则author=""
      * 2. driver 驱动 若配置信息中未包含驱动信息,抛出异常
      * 3. url 链接 若配置信息中未包含链接信息,抛出异常
@@ -83,10 +84,9 @@ public class GlobalConfiguration {
      * 9. daoPath 若配置配置信息中未包含dao输出路径,抛出异常
      * 10. xmlPath 若配置配置信息中未包含xml输出路径,抛出异常
      * 11. servicePath 若配置配置信息中未包含service输出路径,抛出异常
-     * </p>
      *
      * @param properties 配置对象
-     * @throws MojoExecutionException 配置未加载成功<p>
+     * @throws MojoExecutionException 配置未加载成功
      */
     public void load(Properties properties) throws MojoExecutionException {
         // 获取key对应的value值

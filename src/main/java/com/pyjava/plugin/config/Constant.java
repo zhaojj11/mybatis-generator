@@ -1,17 +1,16 @@
 package com.pyjava.plugin.config;
 
 /**
- * @author zhaojj9
- * @description
  * <b>常量类</b>
  * <p>
- *     1. 链接配置信息的键
- *     2. 文件生成目标地址的键
- *     3. 文件相关信息的键
- *     4. 其他相关地址
+ * 1. 链接配置信息的键
+ * 2. 文件生成目标地址的键
+ * 3. 文件相关信息的键
+ * 4. 其他相关地址
  * </p>
- * @date 2019-12-13 18:43
- * @version 1.0
+ *
+ * @author zhaojj9
+ * @since  1.0.0
  */
 public class Constant {
 
@@ -95,5 +94,4 @@ public class Constant {
     public final static String DATE = "date";
     public final static String DATETIME = "datetime";
     public final static String TIMESTAMP = "timestamp";
-
 }
