@@ -166,7 +166,7 @@ mybatis原生的生产器有许多功能上的缺失，以及冗余
     # 待生成表名
     tables=user,user_flow,user_score,score_flow,asd,zxc,test1
     # xml生成位置,是resources的子目录
-    xml.path=mybatis/user/
+    xml.path=user/
     # model的包名
     model.path=com.pyjava.demo.domain
     # dao文件包名

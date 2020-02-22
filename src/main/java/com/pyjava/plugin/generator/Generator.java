@@ -9,11 +9,14 @@ import org.apache.maven.plugin.MojoExecutionException;
 public interface Generator {
     /**
      * 初始化方法
+     *
+     * @throws MojoExecutionException mojo处理异常
      */
     void init() throws MojoExecutionException;
 
     /**
      * 处理方法
+     * @throws MojoExecutionException mojo处理异常
      */
     void service() throws MojoExecutionException;
 

@@ -101,6 +101,7 @@ public class MybatisGenerator implements Generator {
      */
     @Override
     public void service() throws MojoExecutionException {
+        generateMybatisXml();
         List<TableMeta> tables = configuration.getTables();
         for (TableMeta tableMeta : tables) {
             generateModel(tableMeta);
@@ -117,6 +118,38 @@ public class MybatisGenerator implements Generator {
     @Override
     public void destroy() {
         DbUtil.close();
+    }
+
+    private void generateMybatisXml() {
+        log.info("mybatis-generator:开始生成 mybaits-config.xml");
+
+        Configuration freemarkerConfiguration = new Configuration();
+        try {
+            freemarkerConfiguration.setClassForTemplateLoading(this.getClass(), TEMPLATE_PATH);
+            Map<String, Object> dataMap = new HashMap<String, Object>(2);
+            Template template = freemarkerConfiguration.getTemplate("mybatis-config.ftl");
+            String outPath = this.project.getBasedir() + COMMON_PATH + RESOURCE_PATH + MYBATIS_PATH + "/";
+            File file = new File(outPath);
+            if (!file.exists()) {
+                file.mkdirs();
+            }
+            String filename = "mybaits-config.xml";
+            log.info("mybatis-generator:文件路径为" + outPath + filename);
+            File docFile = new File(outPath + filename);
+            out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(docFile)));
+            // step6 输出文件
+            template.process(dataMap, out);
+        } catch (IOException | TemplateException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (null != out) {
+                    out.flush();
+                }
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        }
     }
 
     private void generateModel(TableMeta tableMeta) throws MojoExecutionException {
@@ -266,7 +299,7 @@ public class MybatisGenerator implements Generator {
             Map<String, Object> dataMap = new HashMap<String, Object>();
             dataMap.put("xml", xmlInfo);
             Template template = xmlConfiguration.getTemplate("xml.ftl");
-            String outPath = this.project.getBasedir() + COMMON_PATH + RESOURCE_PATH + StringUtil.getPathFromPoint(configuration.getXmlPath()) + "/";
+            String outPath = this.project.getBasedir() + COMMON_PATH + RESOURCE_PATH + MYBATIS_PATH + StringUtil.getPathFromPoint(configuration.getXmlPath()) + "/";
             File file = new File(outPath);
             if (!file.exists()) {
                 file.mkdirs();

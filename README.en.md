@@ -166,7 +166,7 @@ It is recommended to use **IDEA**, **Mysql 5.x** for development
     # 待生成表名
     tables=user,user_flow,user_score,score_flow,asd,zxc,test1
     # xml生成位置,是resources的子目录
-    xml.path=mybatis/user/
+    xml.path=user/
     # model的包名
     model.path=com.pyjava.demo.domain
     # dao文件包名

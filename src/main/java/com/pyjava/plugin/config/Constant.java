@@ -77,6 +77,11 @@ public class Constant {
     public final static String RESOURCE_PATH = "/resources";
 
     /**
+     * 其他相关地址 /mybatis
+     */
+    public final static String MYBATIS_PATH = "/mybatis";
+
+    /**
      * 其他相关地址  模板地址
      */
     public final static String TEMPLATE_PATH = "/template";

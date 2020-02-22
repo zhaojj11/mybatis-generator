@@ -109,6 +109,7 @@
 
     <build>
         <plugins>
+            <!--deploy-->
 <!--            &lt;!&ndash; Source &ndash;&gt;-->
 <!--            <plugin>-->
 <!--                <groupId>org.apache.maven.plugins</groupId>-->
@@ -175,6 +176,7 @@
 <!--                    <autoReleaseAfterClose>true</autoReleaseAfterClose>-->
 <!--                </configuration>-->
 <!--            </plugin>-->
+            <!--end deploy-->
             <!--Compiler-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
