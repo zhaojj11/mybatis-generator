@@ -1,10 +1,14 @@
 # mybatis-generator
 
-[![standard-readme compliant](https://img.shields.io/badge/standard--readme-OK-green.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
-[![license-MIT](https://img.shields.io/github/license/sandorZHAO/mybatis-generator)](https://github.com/sandorZHAO/mybatis-generator/LICENSE)
-![license-MIT](https://img.shields.io/github/last-commit/sandorZHAO/mybatis-generator)
 [![Build Status](https://travis-ci.com/sandorZHAO/mybatis-generator.svg?branch=master)](https://travis-ci.com/sandorZHAO/mybatis-generator)
 [![codecov](https://codecov.io/gh/sandorZHAO/mybatis-generator/branch/master/graph/badge.svg)](https://codecov.io/gh/sandorZHAO/mybatis-generator)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.pyjava.plugin/mybatis-generator/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.pyjava.plugin/mybatis-generator)
+[![Sonatype Nexus (Releases)](https://img.shields.io/nexus/r/com.pyjava.plugin/mybatis-generator?server=https%3A%2F%2Foss.sonatype.org)]()
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=sandorZHAO_mybatis-generator&metric=alert_status)](https://sonarcloud.io/dashboard?id=sandorZHAO_mybatis-generator)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=sandorZHAO_mybatis-generator&metric=security_rating)](https://sonarcloud.io/dashboard?id=sandorZHAO_mybatis-generator)
+[![license-MIT](https://img.shields.io/github/license/sandorZHAO/mybatis-generator)](https://github.com/sandorZHAO/mybatis-generator/LICENSE)
+[![license-MIT](https://img.shields.io/github/last-commit/sandorZHAO/mybatis-generator)]()
+[![standard-readme compliant](https://img.shields.io/badge/standard--readme-OK-green.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
 
 该插件可作为mybatis项目的代码生成器, 对lombok提供了部分支持。
 
@@ -39,7 +43,8 @@ mybatis原生的生产器有许多功能上的缺失，以及冗余
 
 ## 使用说明
 
-建议使用 **IDEA** 进行开发
+建议使用 **IDEA**, **MySQL 5.x** 进行开发
+
 
 1. 创建基础项目
 
@@ -57,19 +62,20 @@ mybatis原生的生产器有许多功能上的缺失，以及冗余
        <build>
            <plugins>
                <plugin>
-                  <groupId>com.pyjava.plugin</groupId>
-                  <artifactId>mybatis-generator</artifactId>
-                  <version>1.0.0</version>
-                  <configuration>
-                      <debug>true</debug>
-                  </configuration>
-                  <dependencies>
-                      <dependency>
-                          <groupId>mysql</groupId>
-                          <artifactId>mysql-connector-java</artifactId>
-                          <version>5.1.6</version>
-                      </dependency>
-                  </dependencies>
+                   <groupId>org.springframework.boot</groupId>
+                   <artifactId>spring-boot-maven-plugin</artifactId>
+               </plugin>
+               <plugin>
+                   <groupId>com.pyjava.plugin</groupId>
+                   <artifactId>mybatis-generator</artifactId>
+                   <version>1.0.1</version>
+                   <dependencies>
+                       <dependency>
+                           <groupId>mysql</groupId>
+                           <artifactId>mysql-connector-java</artifactId>
+                           <version>5.1.6</version>
+                       </dependency>
+                   </dependencies>
                </plugin>
            </plugins>
        </build>

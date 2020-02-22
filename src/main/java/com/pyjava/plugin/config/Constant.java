@@ -79,7 +79,7 @@ public class Constant {
     /**
      * 其他相关地址  模板地址
      */
-    public final static String TEMPLATE_PATH = "/mybatis";
+    public final static String TEMPLATE_PATH = "/template";
 
     /**
      * 类型常量

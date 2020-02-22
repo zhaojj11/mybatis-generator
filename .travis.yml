@@ -1,8 +1,21 @@
 language: java
+sudo: false
+install: true
 
-jdk: openjdk8
+addons:
+  sonarcloud:
+    organization: sandorzhao
+    token:
+      secure: IEAHouPRUNR1ZnRz+Lud3R7j9C3sa3nECwLcsHIzztWBzQ8MkHOEwwJRy+F3pko053GpTPtZVY3DHSHFgLA7QXvy2cGr+mh1XJlWmf9fxT6g/9sqmQuiUiKIB6musp5tLydVS90NS3ZfnnVo7K9u2ceZRA9mVUL5E2PQMWLZpJ+aI64/0Tkts1vMk4j7LrNvuwpDKsD9wAfyMRYF0UgQptPPfnCiQoHOdRbnmA1rBIiLKAOq5HvdE0AlmG9PAr7JgYJ5Bn0UHERIbYfrvGT25B7Gyx7fL3GdexYd1YeASHzegn+BgaK9X6ng4qQtEmMU2ONHS00tJQT2uCaJUMv3k3WoN2Qtw7EU5eNfhF+JCa5aBaazNnkTJj8hJIO8wDckqOd61dw7gAm20j4VO3R7f426Zov1nwqIyxAJ7vL5Ay2CYe6G5NfVZgs5CJHNcVQbrdXZbotU8k0l9f8URa8fq1DxZwRCA/QJ6rYBajRHPRYr6pADsnv0fGAxLuo3X129B/3haFKpyUGYHajkP082dSErG8/TSVqEiDthbHMKD51cHlyIBMFJlLworfbbh0GSZL/HmygAc+r/7mRnE3sSZJKq5zPZtIH2Js+LpXxGaWMEhrHcSwObuRqas4KUec3kXbH8vx7hzbi1Mze1n0QzOE7MmL1YRPhZH75YQpoWvQo=
 
-script: "mvn cobertura:cobertura"
+jdk:
+  - openjdk8
 
-after_success:
-  - bash <(curl -s https://codecov.io/bash)
+script:
+  - mvn clean verify sonar:sonar -Pcoverage
+#  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Pcoverage -Dsonar.projectKey=sandorZHAO_mybatis-generator
+
+cache:
+  directories:
+    - '$HOME/.m2/repository'
+    - '$HOME/.sonar/cache'

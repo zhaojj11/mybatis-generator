@@ -1,11 +1,14 @@
 # generator
 
-[![standard-readme compliant](https://img.shields.io/badge/standard--readme-OK-green.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
-[![license-MIT](https://img.shields.io/github/license/sandorZHAO/mybatis-generator)](https://github.com/sandorZHAO/mybatis-generator/LICENSE)
-![license-MIT](https://img.shields.io/github/last-commit/sandorZHAO/mybatis-generator)
 [![Build Status](https://travis-ci.com/sandorZHAO/mybatis-generator.svg?branch=master)](https://travis-ci.com/sandorZHAO/mybatis-generator)
 [![codecov](https://codecov.io/gh/sandorZHAO/mybatis-generator/branch/master/graph/badge.svg)](https://codecov.io/gh/sandorZHAO/mybatis-generator)
-
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.pyjava.plugin/mybatis-generator/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.pyjava.plugin/mybatis-generator)
+[![Sonatype Nexus (Releases)](https://img.shields.io/nexus/r/com.pyjava.plugin/mybatis-generator?server=https%3A%2F%2Foss.sonatype.org)]()
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=sandorZHAO_mybatis-generator&metric=alert_status)](https://sonarcloud.io/dashboard?id=sandorZHAO_mybatis-generator)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=sandorZHAO_mybatis-generator&metric=security_rating)](https://sonarcloud.io/dashboard?id=sandorZHAO_mybatis-generator)
+[![license-MIT](https://img.shields.io/github/license/sandorZHAO/mybatis-generator)](https://github.com/sandorZHAO/mybatis-generator/LICENSE)
+[![license-MIT](https://img.shields.io/github/last-commit/sandorZHAO/mybatis-generator)]()
+[![standard-readme compliant](https://img.shields.io/badge/standard--readme-OK-green.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
 
 The plugin can be used as the code generator of mybatis project, which provides some support for Lombok.
 
@@ -32,7 +35,7 @@ The **MODEL**, **MAPPER** and **XML** files required by mybatis can be generated
 
 ## Usage
 
-It is recommended to use **idea** for development
+It is recommended to use **IDEA**, **Mysql 5.x** for development
 
 1. Create basic project
 
