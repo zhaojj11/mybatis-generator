@@ -1,8 +1,10 @@
 package com.pyjava.plugin.config;
 
+import com.pyjava.plugin.enumeration.Error;
 import com.pyjava.plugin.meta.database.TableMeta;
 import com.pyjava.plugin.util.StringUtil;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.maven.plugin.MojoExecutionException;
 
 import java.util.*;
@@ -16,6 +18,7 @@ import static com.pyjava.plugin.config.Constant.*;
  * @since 1.0.0
  */
 @Data
+@Slf4j
 public class GlobalConfiguration {
 
     /**
@@ -72,7 +75,7 @@ public class GlobalConfiguration {
 
     /**
      * 加载配置
-     *
+     * <p>
      * 1. author 作者 若配置文件中未包含作者信息,则author=""
      * 2. driver 驱动 若配置信息中未包含驱动信息,抛出异常
      * 3. url 链接 若配置信息中未包含链接信息,抛出异常
@@ -92,66 +95,81 @@ public class GlobalConfiguration {
         // 获取key对应的value值
         if (properties.getProperty(AUTHOR) != null) {
             this.author = properties.getProperty(AUTHOR);
+            if (author != null) {
+                log.info("mybatis-generator:生成文件作者为" + author);
+            } else {
+                log.info("mybatis-generator:未发现<author>, 不生成作者");
+            }
         }
 
         if (properties.getProperty(DRIVER) != null) {
             this.driver = properties.getProperty(DRIVER);
+            log.info("mybatis-generator:jdbc驱动为" + driver);
         } else {
-            throw new MojoExecutionException(DRIVER + "参数不可为空");
+            throw new MojoExecutionException(Error.DriverNotFound.getMessage());
         }
 
         if (properties.getProperty(URL) != null) {
             this.url = properties.getProperty(URL);
+            log.info("mybatis-generator:数据库链接url为" + url);
         } else {
-            throw new MojoExecutionException(URL + "参数不可为空");
+            throw new MojoExecutionException(Error.UrlNotFound.getMessage());
         }
 
         if (properties.getProperty(USERNAME) != null) {
             this.username = properties.getProperty(USERNAME);
+            log.info("mybatis-generator:数据库用户名为" + username);
         } else {
-            throw new MojoExecutionException(USERNAME + "参数不可为空");
+            throw new MojoExecutionException(Error.UsernameNotFound.getMessage());
         }
 
         if (properties.getProperty(PASSWORD) != null) {
             this.password = properties.getProperty(PASSWORD);
+            log.info("mybatis-generator:数据库密码为" + password);
         } else {
-            throw new MojoExecutionException(PASSWORD + "参数不可为空");
+            throw new MojoExecutionException(Error.PasswordNotFound.getMessage());
         }
 
         if (this.url != null) {
             this.database = StringUtil.getDatabaseName(this.url);
+            log.info("mybatis-generator:数据库名为" + database);
         } else {
-            throw new MojoExecutionException("数据库名无法识别");
+            throw new MojoExecutionException(Error.UnknownDatabase.getMessage());
         }
 
         if (properties.getProperty(TABLES) != null) {
             this.tableNames = new HashSet<>(Arrays.asList(properties.getProperty(TABLES).split(",")));
+            log.info("mybatis-generator:期待生成的表为" + tableNames);
         } else {
-            throw new MojoExecutionException(TABLES + "参数不可为空");
-        }
-
-        if (properties.getProperty(XML_PATH) != null) {
-            this.xmlPath = properties.getProperty(XML_PATH);
-        } else {
-            throw new MojoExecutionException(XML_PATH + "参数不可为空");
+            throw new MojoExecutionException(Error.TablesNotFound.getMessage());
         }
 
         if (properties.getProperty(MODEL_PATH) != null) {
             this.modelPath = properties.getProperty(MODEL_PATH);
+            log.info("mybatis-generator:model.path=" + modelPath);
         } else {
-            throw new MojoExecutionException(MODEL_PATH + "参数不可为空");
+            throw new MojoExecutionException(Error.ModelPathNotFound.getMessage());
+        }
+
+        if (properties.getProperty(XML_PATH) != null) {
+            this.xmlPath = properties.getProperty(XML_PATH);
+            log.info("mybatis-generator:xml.path=" + xmlPath);
+        } else {
+            throw new MojoExecutionException(Error.XmlPathNotFound.getMessage());
         }
 
         if (properties.getProperty(DAO_PATH) != null) {
             this.daoPath = properties.getProperty(DAO_PATH);
+            log.info("mybatis-generator:dao.path" + daoPath);
         } else {
-            throw new MojoExecutionException(DAO_PATH + "参数不可为空");
+            throw new MojoExecutionException(Error.DaoPathNotFound.getMessage());
         }
 
         if (properties.getProperty(SERVICE_PATH) != null) {
             this.servicePath = properties.getProperty(SERVICE_PATH);
+            log.info("mybatis-generator:service.path" + servicePath);
         } else {
-            throw new MojoExecutionException(SERVICE_PATH + "参数不可为空");
+            throw new MojoExecutionException(Error.ServicePathNotFound.getMessage());
         }
     }
 }

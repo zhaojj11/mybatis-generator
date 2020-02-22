@@ -82,7 +82,7 @@ mybatis原生的生产器有许多功能上的缺失，以及冗余
    </project>
     ```
    
-3. 添加yml配置信息
+3. 添加application.yml配置信息
     
     ```yml
     spring:
@@ -114,7 +114,7 @@ mybatis原生的生产器有许多功能上的缺失，以及冗余
       type-aliases-package: com.pyjava.demo.domain
     ```
    
-4. 添加插件配置信息
+4. 添加插件配置信息generator.properties
 
     ```properties
     # 数据库驱动名

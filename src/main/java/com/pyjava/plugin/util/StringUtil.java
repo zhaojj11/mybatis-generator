@@ -74,7 +74,7 @@ public class StringUtil {
      */
     public static String getPathFromPoint(String path) {
         String[] pathName = path.split("\\.");
-        StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder("/");
         sb.append(pathName[0]);
         for (int i = 1, pathNameLength = pathName.length; i < pathNameLength; i++) {
             sb.append("/").append(pathName[i]);

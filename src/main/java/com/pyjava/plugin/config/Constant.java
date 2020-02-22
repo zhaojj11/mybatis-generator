@@ -10,7 +10,7 @@ package com.pyjava.plugin.config;
  * </p>
  *
  * @author zhaojj9
- * @since  1.0.0
+ * @since 1.0.0
  */
 public class Constant {
 
@@ -44,16 +44,16 @@ public class Constant {
     /**
      * 文件生成目标地址的键  model生成目标地址
      */
-    public final static String MODEL_PATH = "model.package";
+    public final static String MODEL_PATH = "model.path";
     /**
      * 文件生成目标地址的键  dao生成目标地址
      */
-    public final static String DAO_PATH = "dao.package";
+    public final static String DAO_PATH = "dao.path";
 
     /**
      * 文件生成目标地址的键  service生成目标地址
      */
-    public final static String SERVICE_PATH = "service.package";
+    public final static String SERVICE_PATH = "service.path";
 
 
     /**
@@ -94,4 +94,22 @@ public class Constant {
     public final static String DATE = "date";
     public final static String DATETIME = "datetime";
     public final static String TIMESTAMP = "timestamp";
+
+
+    public static final String NOT_FOUND = "在generator.properties文件中未发现";
+    /**
+     * 错误常量字符串
+     */
+    public static final String DRIVER_NOT_FOUND = NOT_FOUND + "<" + DRIVER + ">";
+    public static final String URL_NOT_FOUND = NOT_FOUND + "<" + URL + ">";
+    public static final String USERNAME_NOT_FOUND = NOT_FOUND + "<" + USERNAME + ">";
+    public static final String PASSWORD_NOT_FOUND = NOT_FOUND + "<" + PASSWORD + ">";
+    public static final String UNKNOWN_DATABASE = "数据库名无法识别";
+    public static final String TABLES_NOT_FOUND = NOT_FOUND + "<" + TABLES + ">";
+    public static final String MODEL_PATH_NOT_FOUND = NOT_FOUND + "<" + MODEL_PATH + ">";
+    public static final String DAO_PATH_NOT_FOUND = NOT_FOUND + "<" + DAO_PATH + ">";
+    public static final String XML_PATH_NOT_FOUND = NOT_FOUND + "<" + XML_PATH + ">";
+    public static final String SERVICE_PATH_NOT_FOUND = NOT_FOUND + "<" + SERVICE_PATH + ">";
+
+
 }

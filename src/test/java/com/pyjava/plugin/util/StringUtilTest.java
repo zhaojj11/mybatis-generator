@@ -31,6 +31,6 @@ public class StringUtilTest {
     public void getPathFromPoint() {
         String domainPackage = "com.example.generatortest.domain";
         String test = StringUtil.getPathFromPoint(domainPackage);
-        assert test.equals("com/example/generatortest/domain");
+        assert test.equals("/com/example/generatortest/domain");
     }
 }
