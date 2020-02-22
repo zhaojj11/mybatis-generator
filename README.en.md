@@ -120,11 +120,11 @@ It is recommended to use **IDEA**, **Mysql 5.x** for development
     # xml生成位置,是resources的子目录
     xml.path=mybatis/user/
     # model的包名
-    model.package=com.pyjava.demo.domain
+    model.path=com.pyjava.demo.domain
     # dao文件包名
-    dao.package=com.pyjava.demo.dao
+    dao.path=com.pyjava.demo.dao
     # service包名
-    service.package=com.pyjava.demo.service
+    service.path=com.pyjava.demo.service
     # 作者信息
     author=zhaojj9
     ```
