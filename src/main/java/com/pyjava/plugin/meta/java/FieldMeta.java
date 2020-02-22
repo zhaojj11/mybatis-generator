@@ -6,9 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 域信息
+ *
  * @author zhaojj9
- * @description 域信息
- * @date 2019-12-16 13:52
+ * @since 1.0.0
  */
 @Data
 public class FieldMeta {

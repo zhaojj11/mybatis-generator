@@ -5,9 +5,10 @@ import lombok.ToString;
 import org.apache.commons.lang3.StringUtils;
 
 /**
+ * 字段结构
+ *
  * @author zhaojj9
- * @description 字段结构
- * @date 2019-12-13 16:19
+ * @since 1.0.0
  */
 @Data
 @ToString

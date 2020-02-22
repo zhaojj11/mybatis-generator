@@ -10,13 +10,22 @@ import java.util.List;
 import java.util.Set;
 
 /**
+ * 数据库工具
+ *
  * @author zhaojj9
- * @description
- * @date 2019-12-13 16:15
+ * @since 1.0.0
  */
 public class DbUtil {
     private static Connection connection;
 
+    /**
+     * 通过{@link GlobalConfiguration}获取连接
+     *
+     * @param configuration 全局配置信息
+     * @return 获取的正常连接
+     * @throws SQLException           getConnection时错误抛出异常
+     * @throws ClassNotFoundException forName类没有找到抛出异常
+     */
     public static Connection getConnection(GlobalConfiguration configuration) throws SQLException, ClassNotFoundException {
         if (connection != null) {
             return connection;
@@ -27,6 +36,9 @@ public class DbUtil {
         return connection;
     }
 
+    /**
+     * 关闭连接
+     */
     public static void close() {
         if (connection != null) {
             try {
@@ -37,12 +49,18 @@ public class DbUtil {
         }
     }
 
+    /**
+     * 获取表信息
+     * 先查询表名，表注释
+     * 再根据对应表查询所有字段
+     * @param configuration 全局配置信息
+     */
     public static void getTable(GlobalConfiguration configuration) {
         String databaseName = configuration.getDatabase();
         String sql =
                 "SELECT TABLE_NAME ,TABLE_COMMENT " +
-                "FROM information_schema.tables " +
-                "WHERE table_schema = ?";
+                        "FROM information_schema.tables " +
+                        "WHERE table_schema = ?";
         Connection connection = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -80,6 +98,11 @@ public class DbUtil {
     }
 
 
+    /**
+     * 查询所有表的信息
+     *
+     * @param configuration
+     */
     private static void getTables(GlobalConfiguration configuration) {
         List<TableMeta> list = configuration.getTables();
         if (list != null) {
@@ -90,6 +113,10 @@ public class DbUtil {
         DbUtil.close();
     }
 
+    /**
+     * @param configuration
+     * @param tableMeta
+     */
     private static void getTable(GlobalConfiguration configuration, TableMeta tableMeta) {
         String databaseName = StringUtil.getDatabaseName(configuration.getUrl());
 

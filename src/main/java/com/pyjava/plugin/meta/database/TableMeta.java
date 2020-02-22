@@ -8,9 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 数据表元数据
+ *
  * @author zhaojj9
- * @description
- * @date 2019-12-13 16:29
+ * @since 1.0.0
  */
 @Data
 @ToString
@@ -18,15 +19,15 @@ public class TableMeta {
     /**
      * 表所属的库
      */
-    private String schemaName ;
+    private String schemaName;
     /**
      * 表名
      */
-    private String tableName ;
+    private String tableName;
     /**
      * 注释
      */
-    private String comment ;
+    private String comment;
     /**
      * 列信息
      */

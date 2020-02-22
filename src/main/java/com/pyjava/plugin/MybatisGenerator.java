@@ -1,6 +1,8 @@
 package com.pyjava.plugin;
 
 import com.pyjava.plugin.config.GlobalConfiguration;
+import com.pyjava.plugin.enumeration.JavaType;
+import com.pyjava.plugin.enumeration.JdbcType;
 import com.pyjava.plugin.meta.java.ClassMeta;
 import com.pyjava.plugin.meta.java.FieldMeta;
 import com.pyjava.plugin.meta.database.ColumnMeta;
@@ -30,9 +32,10 @@ import java.util.*;
 import static com.pyjava.plugin.config.Constant.*;
 
 /**
+ * 作为mybatis生成器的插件入口实现类
+ *
  * @author zhaojj9
- * @description 作为mybatis生成器的插件入口实现类
- * @date 2019-12-10 22:29
+ * @since 1.0.0
  */
 @Slf4j
 @Mojo(name = "mybatis-generator", defaultPhase = LifecyclePhase.GENERATE_SOURCES, requiresDependencyResolution = ResolutionScope.TEST)
@@ -58,18 +61,21 @@ public class MybatisGenerator extends AbstractMojo {
     Writer out = null;
 
     /**
-     * 需要拿到的数据
-     * 1. jdbc(url,name,password)
-     * 2. 需要操作的表名
-     * 3. 是否需要继承类
-     * 4. 是否需要继承接口
-     * 5. 是否需要添加注解
-     * <p>
-     * mapper 接口
-     * save/saveBatch, deleteBy[PK]/deleteBy[PK]s, updateBy[Id], findBy[PK]/findBy[PKs], existsById
+     * 处理器入口
+     * <ul>
+     *     <li>读取配置文件</li>
+     *     <li>载入全局配置</li>
+     *     <li>
+     *         <ul>
+     *             <li>生成model</li>
+     *             <li>生成mapper</li>
+     *             <li>生成xml</li>
+     *         </ul>
+     *     </li>
+     * </ul>
      *
-     * @throws MojoExecutionException
-     * @throws MojoFailureException
+     * @throws MojoExecutionException mojo处理异常
+     * @throws MojoFailureException   mojo失败异常
      */
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
@@ -142,6 +148,12 @@ public class MybatisGenerator extends AbstractMojo {
         }
     }
 
+    /**
+     * 通过数据表元数据生成Xml文件
+     *
+     * @param tableMeta 数据表元数据
+     * @throws MojoExecutionException mojo处理异常
+     */
     private void generateXml(TableMeta tableMeta) throws MojoExecutionException {
         log.info("开始为" + tableMeta.getTableName() + "生成Xml");
         String className = TypeUtil.getClassName(tableMeta, "");
@@ -157,6 +169,8 @@ public class MybatisGenerator extends AbstractMojo {
                 xmlInfo.getId().put("javaType", TypeUtil.getJavaType(column).toLowerCase());
                 if ("auto_increment".equals(column.getExtra())) {
                     xmlInfo.getId().put("generatorKeys", "true");
+                } else {
+                    xmlInfo.getId().put("generatorKeys", "false");
                 }
             } else {
                 HashMap<String, String> map = new HashMap<>();
@@ -202,13 +216,20 @@ public class MybatisGenerator extends AbstractMojo {
         }
     }
 
+    /**
+     * 通过数据表元数据生成Xml文件
+     *
+     * @param tableMeta 数据表元数据
+     * @throws MojoExecutionException mojo处理异常
+     */
     private void generateMapper(TableMeta tableMeta) throws MojoExecutionException {
         log.info("开始为" + tableMeta.getTableName() + "生成Mapper");
         String className = TypeUtil.getClassName(tableMeta, "");
         ClassMeta mapper = new ClassMeta();
         mapper.setPackageName(configuration.getDaoPath());
         mapper.getImports().add(configuration.getModelPath() + "." + className);
-        mapper.getDocs().add("@description " + className + " 映射器");
+        mapper.getDocs().add(className + " 映射器");
+        mapper.getDocs().add("");
         mapper.getDocs().add("@date " + new Date());
         mapper.getDocs().add("@author " + configuration.getAuthor());
         mapper.setClassName(className);
@@ -252,6 +273,12 @@ public class MybatisGenerator extends AbstractMojo {
         }
     }
 
+    /**
+     * 通过数据表元数据生成Xml文件
+     *
+     * @param tableMeta 数据表元数据
+     * @throws MojoExecutionException mojo处理异常
+     */
     public void generateModel(TableMeta tableMeta) throws MojoExecutionException {
         String className = TypeUtil.getClassName(tableMeta, "");
         log.info("开始为" + tableMeta.getTableName() + "生成Model");
@@ -259,19 +286,30 @@ public class MybatisGenerator extends AbstractMojo {
         ClassMeta classMeta = new ClassMeta();
         classMeta.setPackageName(configuration.getModelPath());
         classMeta.getImports().add("lombok.Data");
-        classMeta.getDocs().add("@description " + tableMeta.getTableName() + " " + tableMeta.getComment());
+        classMeta.getDocs().add(tableMeta.getTableName() + " " + tableMeta.getComment());
+        classMeta.getDocs().add("");
         classMeta.getDocs().add("@date " + new Date());
         classMeta.getDocs().add("@author " + configuration.getAuthor());
 
         classMeta.getAnnotations().add("Data");
         classMeta.setClassName(className);
+
+        boolean findDateField = false;
         for (ColumnMeta column : tableMeta.getColumns()) {
             FieldMeta fieldMeta = new FieldMeta();
             fieldMeta.getDocs().add(column.getColumnName() + ":" + column.getColumnComment());
             fieldMeta.setTypename(TypeUtil.getJavaType(column));
             fieldMeta.setFieldName(StringUtil.getSmallCamelString(column.getColumnName()));
             classMeta.getFields().add(fieldMeta);
+            if (TypeUtil.getJdbcType(column).equals(JdbcType.DATE)) {
+                findDateField = true;
+            }
         }
+        if (findDateField) {
+            classMeta.getImports().add(JavaType.Date.getPackageName() + "." + JavaType.Date.getType());
+
+        }
+
         log.info("生成 Model 类文件");
 
         Configuration freemarkerConfiguration = new Configuration();
@@ -303,5 +341,4 @@ public class MybatisGenerator extends AbstractMojo {
             }
         }
     }
-
 }
