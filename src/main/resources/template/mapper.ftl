@@ -48,7 +48,7 @@ int update(${class.entityType} ${class.className?uncap_first});
 /**
 * 根据id获取
 * @param id 主键
-* @return 影响记录数
+* @return 实体
 */
 ${class.entityType} findById(${class.pkType} id);
 }

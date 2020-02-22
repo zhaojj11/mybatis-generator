@@ -106,6 +106,8 @@ public class MybatisGenerator implements Generator {
             generateModel(tableMeta);
             generateMapper(tableMeta);
             generateXml(tableMeta);
+            generateService(tableMeta);
+            generateServiceImpl(tableMeta);
         }
     }
 
@@ -270,6 +272,111 @@ public class MybatisGenerator implements Generator {
                 file.mkdirs();
             }
             String filename = className + "Mapper.xml";
+            log.info("mybatis-generator:文件路径为" + outPath + filename);
+            File docFile = new File(outPath + filename);
+            out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(docFile)));
+            // 输出文件
+            template.process(dataMap, out);
+        } catch (IOException | TemplateException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (null != out) {
+                    out.flush();
+                }
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        }
+    }
+
+    private void generateService(TableMeta tableMeta) throws MojoExecutionException {
+        log.info("mybatis-generator:开始为" + tableMeta.getTableName() + "生成Service接口");
+        // 生成service接口
+        String className = TypeUtil.getClassName(tableMeta, "");
+        ClassMeta service = new ClassMeta();
+        service.setPackageName(configuration.getServicePath());
+        service.getImports().add(configuration.getModelPath() + "." + className);
+        service.getDocs().add(className + " 服务层");
+        service.getDocs().add("");
+        service.getDocs().add("@date " + new Date());
+        service.getDocs().add("@author " + configuration.getAuthor());
+        service.setClassName(className);
+        service.setEntityType(className);
+
+        for (ColumnMeta column : tableMeta.getColumns()) {
+            if ("PRI".equals(column.getColumnKey())) {
+                service.setPkType(TypeUtil.getJavaType(column));
+            }
+        }
+
+        Configuration mapperConfiguration = new Configuration();
+        try {
+            // 获取模版路径
+            mapperConfiguration.setClassForTemplateLoading(this.getClass(), TEMPLATE_PATH);
+            // 创建数据模型
+            Map<String, Object> dataMap = new HashMap<String, Object>();
+            dataMap.put("class", service);
+            Template template = mapperConfiguration.getTemplate("service.ftl");
+            String outPath = this.project.getBasedir() + COMMON_PATH + JAVA_PATH + StringUtil.getPathFromPoint(configuration.getServicePath()) + "/";
+            File file = new File(outPath);
+            if (!file.exists()) {
+                file.mkdirs();
+            }
+            String filename = service.getClassName() + "Service.java";
+            log.info("mybatis-generator:文件路径为" + outPath + filename);
+            File docFile = new File(outPath + filename);
+            out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(docFile)));
+            // 输出文件
+            template.process(dataMap, out);
+        } catch (IOException | TemplateException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (null != out) {
+                    out.flush();
+                }
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        }
+    }
+
+    private void generateServiceImpl(TableMeta tableMeta) throws MojoExecutionException {
+        log.info("mybatis-generator:开始为" + tableMeta.getTableName() + "生成Service实现类");
+        // 生成service实现类
+        String className = TypeUtil.getClassName(tableMeta, "");
+        ClassMeta service = new ClassMeta();
+        service.setPackageName(configuration.getServicePath() + ".impl");
+        service.getImports().add(configuration.getModelPath() + "." + className);
+        service.getDocs().add(className + " 服务层");
+        service.getDocs().add("");
+        service.getDocs().add("@date " + new Date());
+        service.getDocs().add("@author " + configuration.getAuthor());
+        service.setClassName(className);
+        service.setEntityType(className);
+
+        for (ColumnMeta column : tableMeta.getColumns()) {
+            if ("PRI".equals(column.getColumnKey())) {
+                service.setPkType(TypeUtil.getJavaType(column));
+            }
+        }
+
+        Configuration mapperConfiguration = new Configuration();
+        try {
+            // 获取模版路径
+            mapperConfiguration.setClassForTemplateLoading(this.getClass(), TEMPLATE_PATH);
+            // 创建数据模型
+            Map<String, Object> dataMap = new HashMap<String, Object>();
+            dataMap.put("class", service);
+            dataMap.put("mapperImport", configuration.getDaoPath() + "." + className + "Mapper");
+            Template template = mapperConfiguration.getTemplate("serviceImpl.ftl");
+            String outPath = this.project.getBasedir() + COMMON_PATH + JAVA_PATH + StringUtil.getPathFromPoint(configuration.getServicePath()) + "/impl/";
+            File file = new File(outPath);
+            if (!file.exists()) {
+                file.mkdirs();
+            }
+            String filename = service.getClassName() + "ServiceImpl.java";
             log.info("mybatis-generator:文件路径为" + outPath + filename);
             File docFile = new File(outPath + filename);
             out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(docFile)));
