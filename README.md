@@ -68,7 +68,7 @@ mybatis原生的生产器有许多功能上的缺失，以及冗余
                <plugin>
                    <groupId>com.pyjava.plugin</groupId>
                    <artifactId>mybatis-generator</artifactId>
-                   <version>1.0.1</version>
+                   <version>1.0.2</version>
                    <dependencies>
                        <dependency>
                            <groupId>mysql</groupId>

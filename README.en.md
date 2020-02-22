@@ -55,7 +55,7 @@ It is recommended to use **IDEA**, **Mysql 5.x** for development
                <plugin>
                   <groupId>com.pyjava.plugin</groupId>
                   <artifactId>mybatis-generator</artifactId>
-                  <version>1.0.0</version>
+                  <version>1.0.2</version>
                   <configuration>
                       <debug>true</debug>
                   </configuration>
