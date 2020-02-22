@@ -18,7 +18,8 @@ The **MODEL**, **MAPPER** and **XML** files required by mybatis can be generated
 
 ## Table of Contents
 
-- [Background](#background)
+- [Background](#Background)
+- [Function](#function)
 - [Install](#install)
 - [Usage](#usage)
 - [Maintainers](#maintainers)
@@ -27,6 +28,53 @@ The **MODEL**, **MAPPER** and **XML** files required by mybatis can be generated
 - [License](#license)
 
 ## Background
+
+mybatis's native producer has many features missing and redundant
+
+1. lombok support
+2. Generation of simple methods in the service layer
+3. Generation of test methods
+and many more
+
+## Function
+
+1. Model layer
+
+    - [x] generates support annotation comments
+    - [ ] generates some lombok annotations
+        - [x] Data
+        - [ ] ToString
+        - [ ] Other
+    - [ ] Model Object can support inheriting parent classes
+    - [ ] Model Objects can support ignoring certain attributes
+
+2. Mapper layer
+
+    - [x] generates Mapper Interface comments, including class and method comments
+    - [x] generates Interface annotations, including Mapper and Component annotations
+    - [ ] generates Interface custom method name
+
+3. XML layer
+
+    - [x] generates resultMap node
+    - [x] generates sql node
+    - [x] generates basic methods
+    - [ ] generates method name
+    - [x] Generate xml code repeatedly to cover the original file (default override)
+
+4. Service layer
+
+    - [x] generates basic methods
+
+5. Tests
+
+    - [ ] generates tests for mapper,service
+
+6. Others
+
+    - [ ] generates Paging query
+
+
 
 ## Install
 
@@ -55,7 +103,7 @@ It is recommended to use **IDEA**, **Mysql 5.x** for development
                <plugin>
                   <groupId>com.pyjava.plugin</groupId>
                   <artifactId>mybatis-generator</artifactId>
-                  <version>1.0.0</version>
+                  <version>1.1.0</version>
                   <configuration>
                       <debug>true</debug>
                   </configuration>

@@ -19,6 +19,7 @@
 ## 目录
 
 - [背景](#背景)
+- [功能](#功能)
 - [安装](#安装)
 - [使用说明](#使用说明)
 - [维护者](#维护者)
@@ -34,6 +35,43 @@ mybatis原生的生产器有许多功能上的缺失，以及冗余
 2. service层简单方法的生成
 3. 测试方法的生成
 等等
+
+## 功能
+
+1. Model 层
+
+    - [x] Model 对象可支持快速生成注释
+    - [ ] Model 对象可支持部分 lombok 注解
+        - [x] Data
+        - [ ] ToString
+        - [ ] 其他
+    - [ ] Model 对象可支持继承父类
+    - [ ] Model 对象可支持忽略某些属性
+
+2. Mapper 层
+
+    - [x] Mapper 接口生成注释,包括类即方法注释
+    - [x] 接口生成注解,包括 Mapper 和 Component 注解
+    - [ ] Mapper 接口自定义生成方法名称
+
+3. XML 层
+
+    - [x] 根据数据库表信息生成 XML 文件 resultMap
+    - [x] 根据数据库表信息生成 XML 文件 sql 信息
+    - [x] 根据数据库表信息生成 XML 文件的增删改查方法
+    - [ ] XML 文件自定义生成方法名称
+    - [x] 重复生成 xml 代码覆盖原文件(默认覆盖)
+
+4. Service 层
+
+    - [x] 生成简单 service 层
+
+5. 测试
+
+    - [ ] 生成 mapper,service 测试文件
+
+6. 其他
+    - [ ] 加入简单分页
 
 ## 安装
 
@@ -68,7 +106,7 @@ mybatis原生的生产器有许多功能上的缺失，以及冗余
                <plugin>
                    <groupId>com.pyjava.plugin</groupId>
                    <artifactId>mybatis-generator</artifactId>
-                   <version>1.0.1</version>
+                   <version>1.1.0</version>
                    <dependencies>
                        <dependency>
                            <groupId>mysql</groupId>
