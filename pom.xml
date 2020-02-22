@@ -12,7 +12,7 @@
 
     <groupId>com.pyjava.plugin</groupId>
     <artifactId>mybatis-generator</artifactId>
-    <version>1.1.0</version>
+    <version>1.1.1</version>
     <packaging>maven-plugin</packaging>
 
     <properties>
@@ -109,6 +109,7 @@
 
     <build>
         <plugins>
+            <!--deploy-->
 <!--            &lt;!&ndash; Source &ndash;&gt;-->
 <!--            <plugin>-->
 <!--                <groupId>org.apache.maven.plugins</groupId>-->
@@ -175,6 +176,7 @@
 <!--                    <autoReleaseAfterClose>true</autoReleaseAfterClose>-->
 <!--                </configuration>-->
 <!--            </plugin>-->
+            <!--end deploy-->
             <!--Compiler-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
