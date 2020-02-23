@@ -1,7 +1,5 @@
 package com.pyjava.plugin.enumeration;
 
-import com.pyjava.plugin.enumeration.JavaType;
-
 /**
  * jdbc类型枚举类
  *
@@ -40,7 +38,7 @@ public enum JdbcType {
     /**
      * INT
      */
-    INTEGER("INT", JavaType.Integer),
+    INTEGER("INTEGER", JavaType.Integer),
     /**
      * BIGINT
      */

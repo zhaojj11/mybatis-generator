@@ -133,7 +133,7 @@ public class MybatisGenerator implements Generator {
             if (!file.exists()) {
                 file.mkdirs();
             }
-            String filename = "mybaits-config.xml";
+            String filename = "mybatis-config.xml";
             log.info("mybatis-generator:文件路径为" + outPath + filename);
             File docFile = new File(outPath + filename);
             out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(docFile)));
@@ -402,6 +402,7 @@ public class MybatisGenerator implements Generator {
             // 创建数据模型
             Map<String, Object> dataMap = new HashMap<String, Object>();
             dataMap.put("class", service);
+            dataMap.put("serviceImport", configuration.getServicePath() + "." + className + "Service");
             dataMap.put("mapperImport", configuration.getDaoPath() + "." + className + "Mapper");
             Template template = mapperConfiguration.getTemplate("serviceImpl.ftl");
             String outPath = this.project.getBasedir() + COMMON_PATH + JAVA_PATH + StringUtil.getPathFromPoint(configuration.getServicePath()) + "/impl/";
