@@ -73,6 +73,7 @@ and many more
 6. Others
 
     - [ ] generates Paging query
+    - [ ] Automatic recognition of enumeration type
 
 
 
